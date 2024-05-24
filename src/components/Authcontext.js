@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
-export const AuthContext = createContext();
+export const Authcontext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
@@ -24,8 +24,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, loading }}>
+    <Authcontext.Provider value={{ user, login, loading }}>
       {children}
-    </AuthContext.Provider>
+    </Authcontext.Provider>
   );
 };

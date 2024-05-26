@@ -4,27 +4,46 @@ import { jwtDecode } from "jwt-decode";
 export const Authcontext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
   const [loading, setLoading] = useState(true); // <-- Add a loading state
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      const decodedUser = jwtDecode(token);
-      setUser(decodedUser);
+    console.log("token is ", token);
+    if (token && typeof token === "string") {
+      try {
+        const decodedUser = jwtDecode(token);
+        setUser(decodedUser);
+      } catch (error) {
+        console.error("Invalid token:", error);
+        // Handle the invalid token scenario, e.g., clear the token from storage
+        localStorage.removeItem("token");
+      }
+    } else {
+      console.log("tocken is not a string");
     }
     setLoading(false);
   }, []);
 
   const login = (token) => {
-    localStorage.setItem(token);
-    const decodedUser = jwtDecode(token);
-    setUser(decodedUser);
+    try {
+      console.log("tocken is set");
+      const decodedUser = jwtDecode(token);
+      setUser(decodedUser);
+      console.log("user is", decodedUser);
+      localStorage.setItem("token", token);
+    } catch (error) {
+      console.error("Invalid token during login:", error);
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
   };
 
   return (
-    <Authcontext.Provider value={{ user, login, loading }}>
+    <Authcontext.Provider value={{ user, login, logout, loading }}>
       {children}
     </Authcontext.Provider>
   );

@@ -68,3 +68,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+**Additional information of the project**
+This project uses React for the frontend.
+Tailwind CSS is used for styling.
+React Router is used for routing.
+Axios is used for making HTTP requests.
+The application assumes the presence of a backend API for user authentication and profile creation. Ensure that your backend API is running and properly configured.
+
+

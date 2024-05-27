@@ -78,9 +78,10 @@ const Login = () => {
       const result = [data];
       console.log("token is ", result[0]);
       const token = data.access_token;
+      const reftoken = data.refresh_token;
       console.log(token);
       if (token || data) {
-        login(token);
+        login(token, reftoken);
         console.log("succes");
         navigate("/profile");
       } else {
@@ -91,42 +92,56 @@ const Login = () => {
     }
   };
   return (
-    <>
+    <div className="flex flex-col items-center justify-center h-screen">
       {!otpsent ? (
-        <div>
-          <h2>Login</h2>
+        <div className="bg-white p-8 rounded-md shadow-md">
+          <h2 className="text-2xl mb-4">Login</h2>
           <input
             type="text"
-            placeholder="Enterphone..."
+            placeholder="Enter phone..."
             name="phone"
+            value={contact}
             onChange={(e) => setcontact(e.target.value)}
+            className="border border-gray-300 rounded-md px-3 py-2 mb-4"
           />
           <input
             type="text"
             placeholder="Your Country code..."
             name="country"
+            value={country}
             onChange={(e) => setcountry(e.target.value)}
+            className="border border-gray-300 rounded-md px-3 py-2 mb-4"
           />
-          <button onClick={(e) => handleSendOtp(e.target.value)} type="submit">
-            Send Otp
+          <button
+            onClick={handleSendOtp}
+            type="submit"
+            className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600"
+          >
+            Send OTP
           </button>
         </div>
       ) : (
-        <div>
-          <h1>verify Otp </h1>
-          <label htmlFor="number">
-            Input Otp
-            <br />
+        <div className="bg-white p-8 rounded-md shadow-md">
+          <h1 className="text-2xl mb-4">Verify OTP</h1>
+          <label htmlFor="otp" className="mb-4">
+            Input OTP
             <input
               type="number"
               name="otp"
+              value={otp}
               onChange={(e) => setotp(e.target.value)}
+              className="border border-gray-300 rounded-md px-3 py-2 mb-4"
             />
           </label>
-          <button onClick={handleVerifyOtp}>Verify</button>
+          <button
+            onClick={handleVerifyOtp}
+            className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600"
+          >
+            Verify
+          </button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

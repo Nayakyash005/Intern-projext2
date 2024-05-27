@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { Authcontext } from "./components/Authcontext";
+import { Authcontext } from "./Authcontext";
 
 const PrivateRoute = ({ children }) => {
-  const { user } = useContext(Authcontext);
-  console.log(user);
+  const token = localStorage.getItem("token");
+  console.log("hamara user", token);
 
-  if (!user) {
+  if (!token) {
     // Redirect to login page if user is not authenticated
     return <Navigate to="/login" />;
   }

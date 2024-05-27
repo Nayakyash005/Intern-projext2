@@ -22,16 +22,20 @@ export const AuthProvider = ({ children }) => {
     } else {
       console.log("tocken is not a string");
     }
+    // return () => {
+    //   localStorage.removeItem("token");
+    // };
     setLoading(false);
   }, []);
 
-  const login = (token) => {
+  const login = (token, reftoken) => {
     try {
       console.log("tocken is set");
       const decodedUser = jwtDecode(token);
       setUser(decodedUser);
       console.log("user is", decodedUser);
       localStorage.setItem("token", token);
+      localStorage.setItem("refresh_token", reftoken);
     } catch (error) {
       console.error("Invalid token during login:", error);
     }

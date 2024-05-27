@@ -46,7 +46,7 @@ const Home = () => {
       <div className="h-12 w-50  bg-yellow-200 px-4 text-xl text-black">
         <p className="mt-3 px-4">
           Note : if You dont have a profile so the profile will also redirect
-          you to the Profile page{" "}
+          you to the Create Profile page{" "}
         </p>
       </div>
     </div>
